@@ -161,6 +161,7 @@ gulp.task('webpack', (done) => {
         loader: 'babel',
         query : {
           presets: [ 'es2015', 'stage-0' ],
+          plugins: [ 'transform-object-assign' ],
         },
       }],
     },

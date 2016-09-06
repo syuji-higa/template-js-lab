@@ -74,77 +74,71 @@ gulp.task('watch', (done) => {
  * browser-sync
  */
 gulp.task('browser-sync', (done) => {
-  return (() => {
-    if(!argv.php) {
-      browserSync.init({
-        server: {
-          baseDir: DEST_ROOT,
-        },
-        open  : false,
-        notify: false,
-        reloadOnRestart: true,
-          directory: true,
-      }, done);
-    }
-    else {
-      connect.server({
-        port: 3002,
-        base: DEST_ROOT,
-        keepalive: false,
-      });
-      browserSync.init({
-        proxy     : 'localhost:3002',
-        open      : false,
-        notify    : false,
-        reloadOnRestart: true,
-      }, done);
-    }
-  })();
+  if(!argv.php) {
+    browserSync.init({
+      server: {
+        baseDir: DEST_ROOT,
+      },
+      open  : false,
+      notify: false,
+      reloadOnRestart: true,
+      // directory: true,
+    }, done);
+  }
+  else {
+    connect.server({
+      port: 3002,
+      base: DEST_ROOT,
+      keepalive: false,
+    });
+    browserSync.init({
+      proxy     : 'localhost:3002',
+      open      : false,
+      notify    : false,
+      reloadOnRestart: true,
+    }, done);
+  }
 });
 
 
 /**
  * pug
  */
-gulp.task('pug', (done) => {
-  return (() => {
-    gulp.src(join(PUG_SRC, '/**/*.pug'))
-      .pipe(plumber(PLUMBER_OPTS))
-      .pipe(cache('pug'))
-      .pipe(gulpPug({
-        pug    : pug,
-        pretty : true,
-        basedir: join(__dirname, PUG_SRC),
-      }))
-      .pipe(gulp.dest(PUG_DEST))
-      .on('end', done);
-  })();
+gulp.task('pug', () => {
+  return gulp.src(join(PUG_SRC, '/**/*.pug'))
+    .pipe(plumber(PLUMBER_OPTS))
+    .pipe(cache('pug'))
+    .pipe(gulpPug({
+      pug    : pug,
+      pretty : true,
+      basedir: join(__dirname, PUG_SRC),
+    }))
+    .pipe(gulp.dest(PUG_DEST));
 });
 
 
 /**
  * stylus
  */
-gulp.task('stylus', (done) => {
-  return (() => {
-    gulp.src(join(STYLUS_SRC, '/**/*.styl'))
-      .pipe(plumber(PLUMBER_OPTS))
-      .pipe(cache('stylus'))
-      .pipe(stylus({
-        use     : [ nib() ],
-        compress: false,
-      }))
-      .pipe(sourcemaps.init({ loadMaps: true }))
-      .pipe(sourcemaps.write('.'))
-      .pipe(gulp.dest(STYLUS_DEST))
-      .on('end', done);
-  })();
+gulp.task('stylus', () => {
+  return gulp.src(join(STYLUS_SRC, '/**/*.styl'))
+    .pipe(plumber(PLUMBER_OPTS))
+    .pipe(cache('stylus'))
+    .pipe(stylus({
+      'include css': true,
+      import       : [ 'nib' ],
+      use          : [ nib() ],
+      compress     : false,
+    }))
+    .pipe(sourcemaps.init({ loadMaps: true }))
+    .pipe(sourcemaps.write('.'))
+    .pipe(gulp.dest(STYLUS_DEST));
 });
 
 /**
  * webpack
  */
-gulp.task('webpack', (done) => {
+gulp.task('webpack', () => {
   return webpack({
     entry: join(__dirname, WEBPACK_SRC, 'main.js'),
     output: {
@@ -174,6 +168,5 @@ gulp.task('webpack', (done) => {
   }, (err, stats) => {
     if(err) throw new gutil.PluginError('webpack', err);
     gutil.log('[webpack]', stats.toString());
-    done();
   });
 });

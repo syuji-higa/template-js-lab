@@ -18,7 +18,7 @@ import cache from 'gulp-cached';
 import plumber from 'gulp-plumber';
 import notify from 'gulp-notify';
 
-const argv = minimist(process.argv.slice(2));
+const argv        = minimist(process.argv.slice(2));
 const browserSync = bs.create();
 
 
@@ -27,14 +27,14 @@ const browserSync = bs.create();
  */
 const DEST_ROOT = 'htdocs';
 
-const PUG_SRC     = './pug';
-const PUG_DEST    = DEST_ROOT;
+const PUG_SRC  = './pug';
+const PUG_DEST = DEST_ROOT;
 
-const STYLUS_SRC   = './stylus/src';
-const STYLUS_DEST  = DEST_ROOT;
+const STYLUS_SRC  = './stylus/src';
+const STYLUS_DEST = DEST_ROOT;
 
-const WEBPACK_SRC   = './webpack';
-const WEBPACK_DEST  = DEST_ROOT;
+const WEBPACK_SRC  = './webpack';
+const WEBPACK_DEST = DEST_ROOT;
 
 
 /**

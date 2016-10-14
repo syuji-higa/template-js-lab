@@ -42,7 +42,7 @@
     "pug": "^2.0.0-beta2",
     "run-sequence": "^1.2.2",
     "stylus": "^0.48.1",
-    "webpack": "^1.4.13"
+    "webpack": "^2.1.0-beta.25"
   },
   "dependencies": {}
 }

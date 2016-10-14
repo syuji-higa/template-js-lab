@@ -146,25 +146,26 @@ gulp.task('webpack', () => {
       filename: 'bundle.js',
     },
     resolve: {
-      root      : [ join(__dirname, 'bower_components') ],
-      extensions: [ '', '.js' ],
+      descriptionFiles: [ 'package.json', 'bower.json' ],
+      extensions      : [ '.js' ],
+      modules: [
+        join(__dirname, 'webpack'),
+        join(__dirname, 'bower_components'),
+        'node_modules',
+      ],
     },
     module: {
-      loaders:[{
-        test  : /\.js$/,
-        loader: 'babel',
-        query : {
+      rules:[{
+        test   : /\.js$/,
+        use    : 'babel',
+        exclude: /(node_modules|bower_components)/,
+        options: {
           presets: [ 'es2015', 'stage-0' ],
           plugins: [ 'transform-object-assign' ],
         },
       }],
     },
     devtool: 'source-map',
-    plugins: [
-      new webpack.ResolverPlugin(
-        new webpack.ResolverPlugin.DirectoryDescriptionFilePlugin('bower.json', [ 'main' ])
-      ),
-    ],
   }, (err, stats) => {
     if(err) throw new gutil.PluginError('webpack', err);
     gutil.log('[webpack]', stats.toString());

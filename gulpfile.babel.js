@@ -160,7 +160,7 @@ gulp.task('webpack', () => {
         loader : 'babel-loader',
         exclude: /(node_modules|bower_components)/,
         options: {
-          presets: [ 'es2015', 'stage-0' ],
+          presets: [ 'es2017', 'stage-0' ],
         },
       }],
     },

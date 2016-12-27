@@ -156,8 +156,8 @@ gulp.task('webpack', () => {
     },
     module: {
       rules:[{
-        test   : /\.js$/,
-        use    : 'babel',
+        test: /\.js$/,
+        loader : 'babel-loader',
         exclude: /(node_modules|bower_components)/,
         options: {
           presets: [ 'es2015', 'stage-0' ],

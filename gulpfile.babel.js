@@ -161,7 +161,6 @@ gulp.task('webpack', () => {
         exclude: /(node_modules|bower_components)/,
         options: {
           presets: [ 'es2015', 'stage-0' ],
-          plugins: [ 'transform-object-assign' ],
         },
       }],
     },

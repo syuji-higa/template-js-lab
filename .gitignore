@@ -11,6 +11,9 @@ node_modules
 # sourcemap
 *.map
 
+# fuse box
+.fusebox
+
 # sound files
 *.aif
 *.mid

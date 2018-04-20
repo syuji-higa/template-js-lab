@@ -18,7 +18,7 @@ const fuse = FuseBox.init({
 fuse
   .bundle('bundle')
   .instructions('>main.js')
-  .hmr()
+  .hmr({ reload: true })
   .watch();
 
 fuse.dev({

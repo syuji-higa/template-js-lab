@@ -17,8 +17,9 @@ const fuse = FuseBox.init({
             {
               targets: {
                 browsers: [
-                  'last 2 versions',
-                  'safari >= 7',
+                  'last 3 versions',
+                  'not < 0.25%',
+                  'not Android < 5',
                 ],
               },
               useBuiltIns: true,

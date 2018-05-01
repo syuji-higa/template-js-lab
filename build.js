@@ -6,11 +6,11 @@ import {
 const fuse = FuseBox.init({
   homeDir: 'src',
   output: 'dist/$name.js',
-  sourceMaps: true,
   plugins: [
     BabelPlugin({
-      extensions: ['.js'],
-      test: /\.js$/,
+      config: {
+        sourceMaps: true,
+      },
     }),
   ],
 });

@@ -1,15 +1,33 @@
-import {
+const {
   FuseBox,
   BabelPlugin,
-} from 'fuse-box';
+} = require('fuse-box');
 
 const fuse = FuseBox.init({
   homeDir: 'src',
   output: 'dist/$name.js',
+  sourceMaps: true,
   plugins: [
     BabelPlugin({
       config: {
         sourceMaps: true,
+        presets: [
+          [
+            'env',
+            {
+              targets: {
+                browsers: [
+                  'last 2 versions',
+                  'safari >= 7',
+                ],
+              },
+              useBuiltIns: true,
+            },
+          ],
+          [
+            'stage-0',
+          ],
+        ],
       },
     }),
   ],
